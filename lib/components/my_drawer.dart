@@ -1,6 +1,8 @@
 import 'package:delivery_app_jk_yc/components/my_drawer_tile.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/settings_page.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
