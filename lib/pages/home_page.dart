@@ -12,9 +12,21 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   // tab controller
+  late TabController _tabController;
 
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         headerSliverBuilder:
             (context, innerBoxIsScrolled) => [
               MySliverAppBar(
-                title: MyTabBar(tabController: ,),
+                title: MyTabBar(tabController: _tabController,),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -43,7 +55,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ],
-        body: Container(color: Colors.blue),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) => Text("firt tab items")
+              ),
+              ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) => Text("second tab items")
+              ),
+              ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) => Text("third tab items")
+              ),
+          ],
+        )
       ),
     );
   }
