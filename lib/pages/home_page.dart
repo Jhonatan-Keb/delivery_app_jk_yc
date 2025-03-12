@@ -6,6 +6,7 @@ import 'package:delivery_app_jk_yc/components/my_sliver_app_bar.dart';
 import 'package:delivery_app_jk_yc/components/my_tab_bar.dart';
 import 'package:delivery_app_jk_yc/models/food.dart';
 import 'package:delivery_app_jk_yc/models/restaurant.dart';
+import 'package:delivery_app_jk_yc/pages/food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -58,7 +59,13 @@ class _HomePageState extends State<HomePage>
           // return food tile UI
           return FoodTile(
             food: food,
-            onTab: () {});
+            onTab: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FoodPage(food: food),
+              )
+            )
+          );
         },
       );
     }).toList();
