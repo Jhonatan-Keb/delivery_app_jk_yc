@@ -59,12 +59,11 @@ class _HomePageState extends State<HomePage>
           // return food tile UI
           return FoodTile(
             food: food,
-            onTab: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FoodPage(food: food),
-              )
-            )
+            onTab:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FoodPage(food: food)),
+                ),
           );
         },
       );
@@ -90,7 +89,7 @@ class _HomePageState extends State<HomePage>
                     ),
 
                     // switch
-                    const MyCurrentLocation(),
+                    MyCurrentLocation(),
 
                     // description box
                     const MyDescriptionBox(),

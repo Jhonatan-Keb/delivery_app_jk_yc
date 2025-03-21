@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:delivery_app_jk_yc/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
 import '../components/my_button.dart';
@@ -18,6 +21,39 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmpasswordController =
       TextEditingController();
+
+  // register method
+  void register() async {
+    // get auth service
+    final _authService = AuthService();
+
+    // check if password match -> create user
+    if (passwordController.text == confirmpasswordController.text) {
+      // try creating user
+      try {
+        await _authService.signUpWithEmailPassword(
+          emailController.text,
+          passwordController.text,
+        );
+      }
+      // display any errors
+      catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(title: Text(e.toString())),
+        );
+      }
+    }
+    // if password don't match -> show error
+    else {
+      showDialog(
+        context: context,
+        builder:
+            (context) =>
+                const AlertDialog(title: Text("Passwords don't match!")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 10),
 
             // sign up button
-            MyButton(text: "Sign Up", onTap: () {}),
+            MyButton(text: "Sign Up", onTap: register),
 
             const SizedBox(height: 25),
 
