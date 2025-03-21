@@ -2,6 +2,8 @@ import 'package:delivery_app_jk_yc/components/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
+import 'delivery_progress_page.dart';
+
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
 
@@ -45,14 +47,17 @@ class _PaymentPageState extends State<PaymentPage> {
 
                 // yes button
                 TextButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DeliveryProgressPage(),
-                    )
-                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DeliveryProgressPage(),
+                      ),
+                    );
+                  },
                   child: const Text("Yes"),
-                )
+                ),
               ],
             ),
       );
@@ -99,7 +104,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
           const Spacer(),
 
-          MyButton(onTap: userTapperPay, text: "Pay now"),
+          MyButton(onTap: userTappedPay, text: "Pay now"),
 
           const SizedBox(height: 25),
         ],
