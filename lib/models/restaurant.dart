@@ -342,6 +342,7 @@ class Restaurant extends ChangeNotifier {
   */
 
   List<Food> get menu => _menu;
+  List<CartItem> get cart => _cart;
 
   /*
 
@@ -384,9 +385,9 @@ class Restaurant extends ChangeNotifier {
   void removeFromCart(CartItem cartItem) {
     int cartIndex = _cart.indexOf(cartItem);
 
-    if (cartItem != -1) {
+    if (cartIndex != -1) {
       if (_cart[cartIndex].quantity > 1) {
-        _cart[cartIndex].quantity;
+        _cart[cartIndex].quantity--;
       } else {
         _cart.removeAt(cartIndex);
       }
